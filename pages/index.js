@@ -1,36 +1,7 @@
 import { Box, Button, Text, TextField, Image } from "@skynexui/components";
+import React from "react";
+import { useRouter } from "next/router";
 import appConfig from "../config.json";
-
-function GlobalStyle() {
-  return (
-    <style global jsx>{`
-      * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-        list-style: none;
-      }
-      body {
-        font-family: "Open Sans", sans-serif;
-      }
-      /* App fit Height */
-      html,
-      body,
-      #__next {
-        min-height: 100vh;
-        display: flex;
-        flex: 1;
-      }
-      #__next {
-        flex: 1;
-      }
-      #__next > * {
-        flex: 1;
-      }
-      /* ./App fit Height */
-    `}</style>
-  );
-}
 
 function Titulo(props) {
   const Tag = props.tag;
@@ -51,11 +22,11 @@ function Titulo(props) {
 }
 
 export default function PaginaInicial() {
-  const username = "JoaoVictorMartins05";
+  const [username, setUserName] = React.useState("JoaoVictorMartins05");
+  const router = useRouter();
 
   return (
     <>
-      <GlobalStyle />
       <Box
         styleSheet={{
           display: "flex",
@@ -90,6 +61,11 @@ export default function PaginaInicial() {
           {/* Formulário */}
           <Box
             as="form"
+            onSubmit={function (e) {
+              e.preventDefault();
+              console.log("not loading");
+              router.push("chat");
+            }}
             styleSheet={{
               display: "flex",
               flexDirection: "column",
@@ -113,6 +89,11 @@ export default function PaginaInicial() {
 
             <TextField
               fullWidth
+              value={username}
+              onChange={function (e) {
+                const name = e.target.value;
+                setUserName(name);
+              }}
               textFieldColors={{
                 neutral: {
                   textColor: appConfig.theme.colors.neutrals[200],
@@ -177,15 +158,3 @@ export default function PaginaInicial() {
     </>
   );
 }
-
-// function HomePage() {
-//   return (
-//     <div>
-//       <GlobalStyle />
-//       <Titulo tag="h1">Boas Vindas</Titulo>
-//       <h2>Chat ---</h2>
-//     </div>
-//   );
-// }
-
-// export default HomePage;
