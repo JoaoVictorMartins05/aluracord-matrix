@@ -22,8 +22,8 @@ function Titulo(props) {
 }
 
 export default function PaginaInicial() {
-  const [username, setUserName] = React.useState("JoaoVictorMartins05");
   const router = useRouter();
+  const [username, setUserName] = React.useState("JoaoVictorMartins05");
 
   return (
     <>
@@ -64,7 +64,7 @@ export default function PaginaInicial() {
             onSubmit={function (e) {
               e.preventDefault();
               console.log("not loading");
-              router.push("chat");
+              router.push(`chat?username=${username}`);
             }}
             styleSheet={{
               display: "flex",
