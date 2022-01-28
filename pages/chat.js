@@ -4,6 +4,7 @@ import appConfig from "../config.json";
 import { useRouter } from "next/router";
 import { createClient } from "@supabase/supabase-js";
 import { ButtonSendSticker } from "../src/components/ButtonSendSticker";
+import { ButtonSendMensage } from "../src/components/ButtonSendMensage";
 
 const SUPABASE_ANON_KEY =
   "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiYW5vbiIsImlhdCI6MTY0MzI4OTY1MywiZXhwIjoxOTU4ODY1NjUzfQ.XoSE8rLK8l_AFXtIp6yeXP7S59t6KxaiHNbwEBh4QY8";
@@ -57,6 +58,10 @@ export default function ChatPage() {
       });
 
     setMensagem("");
+  }
+
+  function sendMessage() {
+    handleNovaMensagem(mensagem);
   }
 
   return (
@@ -143,6 +148,7 @@ export default function ChatPage() {
                 handleNovaMensagem(":sticker:" + sticker);
               }}
             />
+            <ButtonSendMensage sendMessage={sendMessage} />
           </Box>
         </Box>
       </Box>
